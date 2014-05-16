@@ -76,6 +76,7 @@
   function login() {
     var username = $('#username').val();
     ajax('/login', 'post', {username: username}, (function(h) {
+      console.log(h);
       $('#username').val('');
       $('#dashboard').empty().append(h);
     }));

@@ -32,7 +32,7 @@ class User{
     }
   }
 
-  hasItems(user){
+    static findItems(user){
     user = this.items;
   }
 
