@@ -1,5 +1,8 @@
+'use strict';
+var audioChop,
+    audioBeanStalk,
+    audioSell;
 (function() {
-  'use strict';
   $(document).ready(init);
   function init() {
     $('#login').click(login);
@@ -11,9 +14,6 @@
     $('#dashboard').on('click', '#purchase-autogrow', purchaseAutoGrow);
     preloadAssets();
   }
-  var audioChop,
-      audioBeanStalk,
-      audioSell;
   function purchaseAutoGrow() {
     var userId = $('#user').attr('data-id');
     ajax(("/users/" + userId + "/purchase/autogrow"), 'put', null, (function(h) {
@@ -81,20 +81,20 @@
       $('#dashboard').empty().append(h);
     }));
   }
-  function ajax(url, type) {
-    var data = arguments[2] !== (void 0) ? arguments[2] : {};
-    var success = arguments[3] !== (void 0) ? arguments[3] : (function(r) {
-      return console.log(r);
-    });
-    var dataType = arguments[4] !== (void 0) ? arguments[4] : 'html';
-    $.ajax({
-      url: url,
-      type: type,
-      dataType: dataType,
-      data: data,
-      success: success
-    });
-  }
 })();
+function ajax(url, type) {
+  var data = arguments[2] !== (void 0) ? arguments[2] : {};
+  var success = arguments[3] !== (void 0) ? arguments[3] : (function(r) {
+    return console.log(r);
+  });
+  var dataType = arguments[4] !== (void 0) ? arguments[4] : 'html';
+  $.ajax({
+    url: url,
+    type: type,
+    dataType: dataType,
+    data: data,
+    success: success
+  });
+}
 
 //# sourceMappingURL=game.map

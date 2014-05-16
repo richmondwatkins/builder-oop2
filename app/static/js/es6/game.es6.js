@@ -1,7 +1,9 @@
 /* jshint unused:false */
-
+'use strict';
+var audioChop, audioBeanStalk, audioSell; //global because the audio files will be used in multiple files
 (function(){
-  'use strict';
+
+
 
   $(document).ready(init);
 
@@ -16,7 +18,6 @@
     preloadAssets();
   }
 
-  var audioChop, audioBeanStalk, audioSell; //global because the audio files will be used in multiple files
 
 
   function purchaseAutoGrow(){
@@ -99,7 +100,9 @@
     });
   }
 
-  function ajax(url, type, data={}, success=r=>console.log(r), dataType='html'){
-    $.ajax({url:url, type:type, dataType:dataType, data:data, success:success});
-  }
 })();
+
+
+function ajax(url, type, data={}, success=r=>console.log(r), dataType='html'){
+  $.ajax({url:url, type:type, dataType:dataType, data:data, success:success});
+}

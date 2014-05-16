@@ -7,11 +7,7 @@ var Item = traceur.require(__dirname + '/../models/item.js');
 
 exports.login = (req, res)=>{
   User.login(req.body.username, user=>{
-    var item = user.items;
-    var img = item.image;
-    console.log(item);
-    console.log(img);
-    res.render('users/dashboard', {user:user, item:item});
+    res.render('users/dashboard', {user:user});
   });
 };
 
@@ -26,13 +22,13 @@ exports.sellWood = (req, res)=>{
   });
 };
 
-exports.autogrow = (req, res)=>{
+exports.purchase = (req, res)=>{
   User.findByUserId(req.params.userId, user=>{
-    var autogrow = new Item('autogrow');
-    autogrow.save(()=>{
-      user.purchase(autogrow);
+    var item = new Item(req.params.item);
+    user.save(()=>{
+      user.purchase(item);
       user.save(()=>{
-        res.render('users/dashboard', {user:user, item:autogrow});
+        res.render('users/dashboard', {user:user, item:item});
       });
     });
   });

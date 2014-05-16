@@ -20,11 +20,11 @@ class Tree{
     var max = this.isAdult && this.isGrowable ? this.height * 0.10 : 2;
     console.log(max);
     this.height += _.random(0, max, true);
-    // var min = this.isAdult ? 200 - ((this.height/12)*0.10) : 200;
-    // min = min < 10 ? 10 : min;
-    // console.log(min);
-    // var rnd = _.random(0, min, true);
-    // this.isHealthy = rnd > 1;
+    var min = this.isAdult ? 200 - ((this.height/12)*0.10) : 200;
+    min = min < 10 ? 10 : min;
+    console.log(min);
+    var rnd = _.random(0, min, true);
+    this.isHealthy = rnd > 1;
   }
 
 
@@ -68,7 +68,7 @@ class Tree{
     return this.isHealthy && !this.isBeanStalk;
   }
 
-  getClass(){
+  get classes(){
     var classes = [];
 
     if(this.height === 0){

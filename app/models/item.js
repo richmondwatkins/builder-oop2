@@ -1,6 +1,6 @@
 'use strict';
 
-var items = global.nss.db.collection('items');
+// var items = global.nss.db.collection('items');
 // var Mongo = require('mongodb');
 // var _ = require('lodash');
 
@@ -17,10 +17,6 @@ class Item{
     }
 
   }
-
-  save(fn){
-    items.save(this, ()=>fn());
-  }
-
 }
+
 module.exports = Item;
