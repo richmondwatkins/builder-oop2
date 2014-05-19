@@ -15,15 +15,38 @@ var audioChop, audioBeanStalk, audioSell; //global because the audio files will 
     $('#forest').on('click', '.chop', chop);
     $('#dashboard').on('click', '#sell-wood', sellWood);
     $('#dashboard').on('click', '#purchase-autogrow', purchaseAutoGrow);
+    $('#dashboard').on('click', '#purchase-autoseed', purchaseAutoSeed);
+    $('#dashboard').on('click', '#purchase-autoroot', purchaseAutoRoot);
     preloadAssets();
   }
 
+
+  function purchaseAutoRoot(){
+    var userId = $('#user').attr('data-id');
+    ajax(`/users/${userId}/purchase/autoroot`, 'put', null, h=>{
+      $('#dashboard').empty().append(h);
+      console.log(h);
+      items();
+    });
+  }
+
+
+
+  function purchaseAutoSeed(){
+    var userId = $('#user').attr('data-id');
+    ajax(`/users/${userId}/purchase/autoseed`, 'put', null, h=>{
+      $('#dashboard').empty().append(h);
+      console.log(h);
+      items();
+    });
+  }
 
 
   function purchaseAutoGrow(){
     var userId = $('#user').attr('data-id');
     ajax(`/users/${userId}/purchase/autogrow`, 'put', null, h=>{
       $('#dashboard').empty().append(h);
+      items();
     });
   }
 
@@ -63,6 +86,7 @@ var audioChop, audioBeanStalk, audioSell; //global because the audio files will 
     var userId = $('#user').attr('data-id');
     ajax(`/users/${userId}`, 'get', null, h=>{
       $('#dashboard').empty().append(h);
+
     });
   }
 
@@ -71,6 +95,7 @@ var audioChop, audioBeanStalk, audioSell; //global because the audio files will 
     var treeId = tree.attr('data-id');
     ajax(`/trees/${treeId}/grow`, 'put', null, h=>{
       tree.replaceWith(h);
+
         if($(h).hasClass('beanstalk')){
           audioBeanStalk.play();
         }
@@ -91,12 +116,23 @@ var audioChop, audioBeanStalk, audioSell; //global because the audio files will 
 
     });
   }
+
+  function items(){
+    var userId = $('#user').attr('data-id');
+    ajax(`/items?userId=${userId}`, 'get', null, h=>{
+      $('#items').empty().append(h);
+    });
+  }
+
+
+
   function login(){
     var username = $('#username').val();
     ajax('/login', 'post', {username:username}, h=>{
-      console.log(h);
       $('#username').val('');
       $('#dashboard').empty().append(h);
+      forest();
+      items();
     });
   }
 

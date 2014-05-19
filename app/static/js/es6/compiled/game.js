@@ -12,12 +12,31 @@ var audioChop,
     $('#forest').on('click', '.chop', chop);
     $('#dashboard').on('click', '#sell-wood', sellWood);
     $('#dashboard').on('click', '#purchase-autogrow', purchaseAutoGrow);
+    $('#dashboard').on('click', '#purchase-autoseed', purchaseAutoSeed);
+    $('#dashboard').on('click', '#purchase-autoroot', purchaseAutoRoot);
     preloadAssets();
+  }
+  function purchaseAutoRoot() {
+    var userId = $('#user').attr('data-id');
+    ajax(("/users/" + userId + "/purchase/autoroot"), 'put', null, (function(h) {
+      $('#dashboard').empty().append(h);
+      console.log(h);
+      items();
+    }));
+  }
+  function purchaseAutoSeed() {
+    var userId = $('#user').attr('data-id');
+    ajax(("/users/" + userId + "/purchase/autoseed"), 'put', null, (function(h) {
+      $('#dashboard').empty().append(h);
+      console.log(h);
+      items();
+    }));
   }
   function purchaseAutoGrow() {
     var userId = $('#user').attr('data-id');
     ajax(("/users/" + userId + "/purchase/autogrow"), 'put', null, (function(h) {
       $('#dashboard').empty().append(h);
+      items();
     }));
   }
   function preloadAssets() {
@@ -73,12 +92,19 @@ var audioChop,
       $('#forest').append(h);
     }));
   }
+  function items() {
+    var userId = $('#user').attr('data-id');
+    ajax(("/items?userId=" + userId), 'get', null, (function(h) {
+      $('#items').empty().append(h);
+    }));
+  }
   function login() {
     var username = $('#username').val();
     ajax('/login', 'post', {username: username}, (function(h) {
-      console.log(h);
       $('#username').val('');
       $('#dashboard').empty().append(h);
+      forest();
+      items();
     }));
   }
 })();

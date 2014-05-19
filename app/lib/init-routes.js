@@ -30,11 +30,11 @@ function load(app, fn){
 
   app.post('/trees/plant', dbg, trees.plant);
   app.get('/trees', dbg, trees.forest);
+  app.get('/items', dbg, users.items);
   app.put('/trees/:treeId/grow', dbg, trees.grow);
   app.put('/trees/:treeId/chop/:userId', dbg, trees.chop);
-
   app.put('/users/:userId/purchase/:item', dbg, users.purchase);
-
+  app.put('/trees/:userId/:treeId/destroy', dbg, trees.destroy);
   console.log('Routes Loaded');
   fn();
 }

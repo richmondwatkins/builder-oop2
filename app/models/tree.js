@@ -19,7 +19,8 @@ class Tree{
   grow(){
     var max = this.isAdult && this.isGrowable ? this.height * 0.10 : 2;
     console.log(max);
-    this.height += _.random(0, max, true);
+    var height = this.height += _.random(0, max, true);
+    console.log(height);
     var min = this.isAdult ? 200 - ((this.height/12)*0.10) : 200;
     min = min < 10 ? 10 : min;
     console.log(min);
@@ -51,6 +52,10 @@ class Tree{
     this.isHealthy = false;
     this.isChopped = true;
   }
+
+  // removeTree(tree){
+  //   console.log(tree.id);
+  // }
 
   get isAdult(){ //get makes it a veritual property
     return this.height >= 48; //functions that start with "is" should typically be a boolean and return true or false

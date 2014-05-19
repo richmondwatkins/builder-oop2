@@ -40,6 +40,20 @@ class User{
     return (this.cash >= 50000) && (!isPresent);
   }
 
+  get isAutoSeedAvailable(){
+    var isPresent = _(this.items).any(i=>i.type === 'autoseed');
+    return (this.cash >= 75000) && (!isPresent);
+  }
+
+  get isAutoRootAvailable(){
+    var isPresent = _(this.items).any(i=>i.type === 'autoroot');
+    return (this.cash >= 75000) && (!isPresent);
+  }
+  // get isAutoSeedAvailable(){
+  //   var isPresent = _(this.items).any(i=>i.type === 'autogrow');
+  //   return (this.cash >= 50000) && (!isPresent);
+  // }
+
   static findByUserId(userId, fn){
     userId = Mongo.ObjectID(userId);
     users.findOne({_id:userId}, (e, user)=>{

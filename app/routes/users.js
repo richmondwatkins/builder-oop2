@@ -1,3 +1,4 @@
+
 'use strict';
 
 var traceur = require('traceur');
@@ -21,6 +22,12 @@ exports.sellWood = (req, res)=>{
     user.save(()=>res.render('users/dashboard', {user:user}));
   });
 };
+
+exports.items = (req, res)=> {
+  User.findByUserId(req.query.userId, user=>res.render('users/items', {user:user}));
+  // console.log(req.query);
+};
+
 
 exports.purchase = (req, res)=>{
   User.findByUserId(req.params.userId, user=>{
